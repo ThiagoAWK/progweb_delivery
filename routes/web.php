@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\RestaurantesController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,3 +22,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/restaurante', [RestaurantesController::class, 'listar']);
+Route::get('/restaurante/create', [RestaurantesController::class, 'create'])->name('restaurante.create');
+Route::get('/restaurante/{restaurante_id}', [RestaurantesController::class, 'show'])->name('restaurante.show');
+Route::post('/restaurante', [RestaurantesController::class, 'store']);
+Route::patch('/restaurante/{restaurante}', [RestaurantesController::class, 'update']);
+Route::delete('/restaurante/{restaurante}', [RestaurantesController::class, 'destroy']);
