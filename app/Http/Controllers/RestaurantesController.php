@@ -9,10 +9,6 @@ use Illuminate\Support\Facades\Redirect;
 
 class RestaurantesController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
     /**
      * Display a listing of the resource.
      */
@@ -76,7 +72,7 @@ class RestaurantesController extends Controller
         } else {
             $request->session()->flash('mensagem_erro', 'Deu Erro');
         }
-        return Redirect::to('restaurante/'.$restaurante->id);
+        return Redirect::to('restaurante/' . $restaurante->id);
     }
 
     /**

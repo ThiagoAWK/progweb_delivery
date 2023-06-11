@@ -16,7 +16,7 @@ class CategoriasController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function listar()
+    public function index()
     {
         $categorias = Categoria::paginate(25);
         Paginator::useBootstrap();
@@ -67,24 +67,24 @@ class CategoriasController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Categoria $categoria)
+    public function update(Request $request, $id)
     {
-        $categoria = Categoria::findOrFail($categoria->id);
+        $categoria = Categoria::findOrFail($id);
         $categoria->fill($request->all());
         if ($categoria->save()){
             $request->session()->flash('mensagem_sucesso', 'Categoria alterado');
         } else {
             $request->session()->flash('mensagem_erro', 'Deu Erro');
         }
-        return Redirect::to('categoria/'.$categoria->id);
+        return Redirect::to('categoria/' . $id);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Categoria $categoria)
+    public function destroy($id)
     {
-        $categoria = Categoria::findOrFail($categoria->id);
+        $categoria = Categoria::findOrFail($id);
         $categoria->delete();
         return Redirect::to('categoria');
     }

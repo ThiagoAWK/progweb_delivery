@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\RestaurantesController;
+use App\Http\Controllers\CategoriasController;
+use App\Http\Controllers\AlimentosController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -29,3 +31,6 @@ Route::get('/restaurante/{restaurante_id}', [RestaurantesController::class, 'sho
 Route::post('/restaurante', [RestaurantesController::class, 'store']);
 Route::patch('/restaurante/{restaurante}', [RestaurantesController::class, 'update']);
 Route::delete('/restaurante/{restaurante}', [RestaurantesController::class, 'destroy']);
+
+Route::resource('categoria', CategoriasController::class);
+Route::resource('alimento', AlimentosController::class);

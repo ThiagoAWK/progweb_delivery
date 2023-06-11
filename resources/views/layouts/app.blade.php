@@ -37,6 +37,8 @@
                             <li class="nav-item">
                                 <a href="{{ url('categoria') }}" class="nav-link">Categorias</a>
                             </li>
+                            <li class="nav-item">
+                                <a href="{{ url('alimento') }}" class="nav-link">Alimentos</a>
                             </li>
                         @endauth
                     </ul>

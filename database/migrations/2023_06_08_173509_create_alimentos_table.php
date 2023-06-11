@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('icone', 150);
             $table->string('nome', 50);
-            $table->text('desc', 150);
+            $table->string('desc', 150);
             $table->float('preco', 5);
             $table->unsignedBigInteger('restaurante_id');
             $table->foreign('restaurante_id')->references('id')->on('restaurantes');

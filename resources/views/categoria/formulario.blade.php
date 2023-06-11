@@ -6,9 +6,9 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        Dados do Restaurante
-                        <a href="{{ url('restaurante') }}" class="btn btn-success btn-sm float-end">
-                            Listar Restaurantes
+                        Dados do Categoria
+                        <a href="{{ url('categoria') }}" class="btn btn-success btn-sm float-end">
+                            Listar Categorias
                         </a>
                     </div>
                     <div class="card-body">
@@ -23,15 +23,12 @@
                             </div>
                         @endif
 
-                        @if(Route::is('restaurante.show'))
-                            {!! Form::model($restaurante,
+                        @if(Route::is('categoria.show'))
+                            {!! Form::model($categoria,
                                             ['method'=>'PATCH',
-                                            'files'=>'True',
-                                            'url'=>'restaurante/' . $restaurante->id]) !!}
-                            <div class="text-center">
-                            </div>
+                                            'url'=>'categoria/' . $categoria->id]) !!}
                         @else
-                            {!! Form::open(['method'=>'POST', 'files'=>'True', 'url'=>'restaurante']) !!}
+                            {!! Form::open(['method'=>'POST', 'url'=>'categoria']) !!}
                         @endif
                         {!! Form::label('nome', 'Nome') !!}
                         {!! Form::input('text', 'nome',
@@ -40,22 +37,6 @@
                                          'placeholder'=>'Nome',
                                          'required',
                                          'maxlength'=>50,
-                                         'autofocus']) !!}
-                        {!! Form::label('endereco', 'Endereço') !!}
-                        {!! Form::input('text', 'endereco',
-                                        null,
-                                        ['class'=>'form-control',
-                                         'placeholder'=>'Endereço',
-                                         'required',
-                                         'maxlength'=>50,
-                                         'autofocus']) !!}
-                        {!! Form::label('fone', 'Telefone') !!}
-                        {!! Form::input('text', 'fone',
-                                        null,
-                                        ['class'=>'form-control',
-                                         'placeholder'=>'Telefone',
-                                         'required',
-                                         'maxlength'=>20,
                                          'autofocus']) !!}
                         {!! Form::submit('Salvar',
                                         ['class'=>'float-end btn btn-primary mt-3']) !!}
