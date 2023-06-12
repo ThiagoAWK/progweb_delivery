@@ -6,10 +6,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        Lista de Alimentos
-                        <a href="{{ url('alimento/create') }}" class="btn btn-success btn-sm float-end">
-                            Novo Alimento
-                        </a>
+                        Cardápio {{ $restaurante->nome }}
                     </div>
                     <div class="card-body">
                         @if(Session::has('mensagem_sucesso'))
@@ -26,6 +23,7 @@
                                     <th>Preço</th>
                                     <th>Restaurante</th>
                                     <th>Categoria</th>
+                                    <th>Carrinho</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -37,33 +35,26 @@
                                         <td>R$ {{ $alimento->preco }}</td>
                                         <td>{{ $alimento->restaurante->nome }}</td>
                                         <td>{{ $alimento->categoria->nome }}</td>
+                                        </td>
                                         <td>
-                                            <a href="{{ url('alimento/' . $alimento->id) }}" class="btn btn-primary btn-sm">
-                                                Editar
-                                            </a>
-                                            {!! Form::open(['method' => 'DELETE', 'url' => 'alimento/' . $alimento->id, 'style' => 'display:inline']) !!}
-                                            <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
-                                            {!! Form::close() !!}
+                                            <form action="{{ route('carrinho.adicionar') }}" method="POST">
+                                                @csrf
+                                                <input type="hidden" name="alimento_id" value="{{ $alimento->id }}">
+                                                <input type="number" name="quantidade" value="1" min="1">
+                                                <button type="submit" class="btn btn-primary">Adicionar</button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="6">
+                                        <td colspan="4">
                                             Não há itens para listar!
                                         </td>
                                     </tr>
                                 @endforelse
                             </tbody>
                         </table>
-                        <div class="pagination justify-content-center">
-                            {{ $alimentos->links() }}
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <a href="{{ url('alimento/report') }}" target="_blank"
-                            class="btn btn-sm btn-warning ">
-                            Relatório
-                        </a>
+                        <a href="{{ route('restaurante.listar') }}" class="btn btn-primary">Continuar Comprando</a>
                     </div>
                 </div>
             </div>

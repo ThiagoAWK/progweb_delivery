@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cliente;
+use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Redirect;
@@ -83,5 +85,19 @@ class ClientesController extends Controller
         $cliente = Cliente::findOrFail($cliente->id);
         $cliente->delete();
         return Redirect::to('cliente');
+    }
+
+    public function showReport()
+    {
+        $clientes = Cliente::get();
+
+        $pdf = Pdf::loadView('reports.clientes', compact('clientes'));
+
+        $pdf->setPaper('a4', 'portrait')
+            ->setOptions(['dpi' => 150, 'defaultFont' => 'sans-serif'])
+            ->setEncryption('admin');
+
+        return $pdf
+            ->stream('relatorio.pdf');
     }
 }

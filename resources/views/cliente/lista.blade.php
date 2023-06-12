@@ -55,6 +55,12 @@
                             {{ $clientes->links() }}
                         </div>
                     </div>
+                    <div class="card-footer">
+                        <a href="{{ url('cliente/report') }}" target="_blank"
+                            class="btn btn-sm btn-warning ">
+                            Relatório
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

@@ -40,6 +40,9 @@
                                             {!! Form::open(['method' => 'DELETE', 'url' => 'restaurante/' . $restaurante->id, 'style' => 'display:inline']) !!}
                                             <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
                                             {!! Form::close() !!}
+                                            <a href="{{ url('restaurante/alimento/' . $restaurante->id) }}" class="btn btn-secondary btn-sm">
+                                                Cardápio
+                                            </a>
                                         </td>
                                     </tr>
                                 @empty

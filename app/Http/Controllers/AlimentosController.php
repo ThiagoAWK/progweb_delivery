@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Alimento;
 use App\Models\Restaurante;
 use App\Models\Categoria;
+use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Redirect;
@@ -124,5 +126,24 @@ class AlimentosController extends Controller
             );
             return Redirect::to('alimento');
         }
+    }
+
+    public function showReport()
+    {
+        $alimentos = Alimento::get();
+        $imagem = 'uploads/alimentos/semfoto.jpg';
+        $alimento = pathinfo($imagem, PATHINFO_EXTENSION);
+        $data = file_get_contents($imagem);
+        $base64 = base64_encode($imagem);
+        $logo = 'data:image' . $alimento . ';base64,' . $base64;
+
+        $pdf = Pdf::loadView('reports.alimentos', compact('alimentos', 'logo'));
+
+        $pdf->setPaper('a4', 'portrait')
+            ->setOptions(['dpi' => 150, 'defaultFont' => 'sans-serif'])
+            ->setEncryption('admin');
+
+        return $pdf
+            ->stream('relatorio.pdf');
     }
 }

@@ -44,6 +44,9 @@
                                 <a href="{{ url('cliente') }}" class="nav-link">Clientes</a>
                             </li>
                             <li class="nav-item">
+                                <a href="{{ url('carrinho') }}" class="nav-link">Carrinho</a>
+                            </li>
+                            <li class="nav-item">
                                 <a href="{{ url('contatos') }}" class="nav-link">Contato</a>
                             </li>
                         @endauth
