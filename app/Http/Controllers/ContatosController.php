@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contato;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
@@ -15,6 +16,12 @@ class ContatosController extends Controller
 
     public function enviar(Request $request)
     {
+        Contato::create([
+            'nome' => $request['nome'],
+            'email' => $request['email'],
+            'fone' => $request['fone'],
+            'mensagem' => $request['mensagem'],
+        ]);
         $dest_nome = "Thiago";
         $dest_email = "thiago.kniphoff@aluno.famper.edu.br";
         $dados = array(
