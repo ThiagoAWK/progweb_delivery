@@ -35,10 +35,16 @@
                                 <a href="{{ url('restaurante') }}" class="nav-link">Restaurantes</a>
                             </li>
                             <li class="nav-item">
+                                <a href="{{ url('alimento') }}" class="nav-link">Alimentos</a>
+                            </li>
+                            <li class="nav-item">
                                 <a href="{{ url('categoria') }}" class="nav-link">Categorias</a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ url('alimento') }}" class="nav-link">Alimentos</a>
+                                <a href="{{ url('cliente') }}" class="nav-link">Clientes</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ url('contatos') }}" class="nav-link">Contato</a>
                             </li>
                         @endauth
                     </ul>

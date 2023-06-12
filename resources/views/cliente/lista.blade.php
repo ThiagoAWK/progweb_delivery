@@ -6,9 +6,9 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        Lista de Restaurantes
-                        <a href="{{ url('restaurante/create') }}" class="btn btn-success btn-sm float-end">
-                            Novo Restaurante
+                        Lista de Clientes
+                        <a href="{{ url('cliente/create') }}" class="btn btn-success btn-sm float-end">
+                            Novo Cliente
                         </a>
                     </div>
                     <div class="card-body">
@@ -27,17 +27,17 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($restaurantes as $restaurante)
+                                @forelse ($clientes as $cliente)
                                     <tr>
-                                        <td>{{ $restaurante->id }}</td>
-                                        <td>{{ $restaurante->nome }}</td>
-                                        <td>{{ $restaurante->endereco }}</td>
-                                        <td>{{ $restaurante->fone }}</td>
+                                        <td>{{ $cliente->id }}</td>
+                                        <td>{{ $cliente->nome }}</td>
+                                        <td>{{ $cliente->endereco }}</td>
+                                        <td>{{ $cliente->fone }}</td>
                                         <td>
-                                            <a href="{{ url('restaurante/' . $restaurante->id) }}" class="btn btn-primary btn-sm">
+                                            <a href="{{ url('cliente/' . $cliente->id) }}" class="btn btn-primary btn-sm">
                                                 Editar
                                             </a>
-                                            {!! Form::open(['method' => 'DELETE', 'url' => 'restaurante/' . $restaurante->id, 'style' => 'display:inline']) !!}
+                                            {!! Form::open(['method' => 'DELETE', 'url' => 'cliente/' . $cliente->id, 'style' => 'display:inline']) !!}
                                             <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
                                             {!! Form::close() !!}
                                         </td>
@@ -52,14 +52,8 @@
                             </tbody>
                         </table>
                         <div class="pagination justify-content-center">
-                            {{ $restaurantes->links() }}
+                            {{ $clientes->links() }}
                         </div>
-                    </div>
-                    <div class="card-footer">
-                        <a href="{{ url('restaurante/report') }}" target="_blank"
-                            class="btn btn-sm btn-warning ">
-                            Relatório
-                        </a>
                     </div>
                 </div>
             </div>

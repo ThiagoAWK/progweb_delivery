@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Restaurante;
+use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Redirect;
@@ -83,5 +85,19 @@ class RestaurantesController extends Controller
         $restaurante = Restaurante::findOrFail($restaurante->id);
         $restaurante->delete();
         return Redirect::to('restaurante');
+    }
+
+    public function showReport()
+    {
+        $restaurantes = Restaurante::get();
+
+        $pdf = Pdf::loadView('reports.restaurantes', compact('restaurantes'));
+
+        $pdf->setPaper('a4', 'portrait')
+            ->setOptions(['dpi' => 150, 'defaultFont' => 'sans-serif'])
+            ->setEncryption('123');
+
+        return $pdf
+            ->stream('relatorio.pdf');
     }
 }

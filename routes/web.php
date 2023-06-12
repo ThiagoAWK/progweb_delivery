@@ -3,6 +3,8 @@
 use App\Http\Controllers\RestaurantesController;
 use App\Http\Controllers\CategoriasController;
 use App\Http\Controllers\AlimentosController;
+use App\Http\Controllers\ClientesController;
+use App\Http\Controllers\ContatosController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +29,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/restaurante', [RestaurantesController::class, 'listar']);
 Route::get('/restaurante/create', [RestaurantesController::class, 'create'])->name('restaurante.create');
+Route::get('/restaurante/report', [RestaurantesController::class, 'ShowReport']);
 Route::get('/restaurante/{restaurante_id}', [RestaurantesController::class, 'show'])->name('restaurante.show');
 Route::post('/restaurante', [RestaurantesController::class, 'store']);
 Route::patch('/restaurante/{restaurante}', [RestaurantesController::class, 'update']);
@@ -34,3 +37,7 @@ Route::delete('/restaurante/{restaurante}', [RestaurantesController::class, 'des
 
 Route::resource('categoria', CategoriasController::class);
 Route::resource('alimento', AlimentosController::class);
+Route::resource('cliente', ClientesController::class);
+
+Route::get('contatos', [ContatosController::class, 'index']);
+Route::post('contatos', [ContatosController::class, 'enviar']);
