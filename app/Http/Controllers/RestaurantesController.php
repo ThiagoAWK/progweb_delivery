@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Restaurante;
 use App\Models\Alimento;
 use App\Models\Categoria;
+use App\Models\Carrinho;
 use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
@@ -109,61 +110,5 @@ class RestaurantesController extends Controller
             $alimentos = $restaurante->alimentos()->get();
             Paginator::useBootstrap();
             return view('restaurante.cardapio', compact('restaurante', 'alimentos'));
-    }
-
-    public function exibirCarrinho()
-    {
-        $carrinho = session()->get('carrinho', []);
-
-        $alimentosCarrinho = [];
-        foreach ($carrinho as $alimentoId => $quantidade) {
-            $alimento = Alimento::findOrFail($alimentoId);
-            $alimentosCarrinho[] = [
-                'alimento' => $alimento,
-                'quantidade' => $quantidade,
-            ];
-        }
-
-        return view('carrinho.exibir', compact('alimentosCarrinho'));
-    }
-
-    public function adicionarCarrinho(Request $request)
-    {
-        $request->validate([
-            'alimento_id' => 'required|exists:alimentos,id',
-            'quantidade' => 'required|integer|min:1',
-        ]);
-
-        $alimentoId = $request->input('alimento_id');
-        $quantidade = $request->input('quantidade');
-
-        $carrinho = session()->get('carrinho', []);
-
-        if (array_key_exists($alimentoId, $carrinho)) {
-            $carrinho[$alimentoId] += $quantidade;
-        } else {
-            $carrinho[$alimentoId] = $quantidade;
-        }
-
-        session()->put('carrinho', $carrinho);
-
-        return redirect()->back()->with('mensagem_sucesso', 'Alimento Adicionado ao Carrinho!');
-    }
-
-    public function removerCarrinho(Request $request)
-    {
-        $request->validate([
-            'alimento_id' => 'required|exists:alimentos,id',
-        ]);
-
-        $alimentoId = $request->input('alimento_id');
-
-        $carrinho = session()->get('carrinho', []);
-
-        unset($carrinho[$alimentoId]);
-
-        session()->put('carrinho', $carrinho);
-
-        return redirect()->route('carrinho.exibir')->with('mensagem_sucesso', 'Alimento Removido do Carrinho!');
     }
 }

@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoriasController;
 use App\Http\Controllers\AlimentosController;
 use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\ContatosController;
+use App\Http\Controllers\CarrinhosController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -45,6 +46,6 @@ Route::resource('cliente', ClientesController::class);
 Route::get('contatos', [ContatosController::class, 'index']);
 Route::post('contatos', [ContatosController::class, 'enviar']);
 
-Route::get('/carrinho', [RestaurantesController::class, 'exibirCarrinho'])->name('carrinho.exibir');
-Route::post('/carrinho/adicionar', [RestaurantesController::class, 'adicionarCarrinho'])->name('carrinho.adicionar');
-Route::post('/carrinho/remover', [RestaurantesController::class, 'removerCarrinho'])->name('carrinho.remover');
+Route::get('/carrinho', [CarrinhosController::class, 'listarCarrinho'])->name('carrinho.lista');
+Route::post('/carrinho/adicionar', [CarrinhosController::class, 'adicionarCarrinho'])->name('carrinho.adicionar');
+Route::post('/carrinho/remover', [CarrinhosController::class, 'removerCarrinho'])->name('carrinho.remover');
