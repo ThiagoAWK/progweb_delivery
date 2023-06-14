@@ -84,7 +84,7 @@ class ClientesController extends Controller
     {
         $cliente = Cliente::findOrFail($cliente->id);
         $cliente->delete();
-        return Redirect::to('cliente');
+        return Redirect::to('cliente')->with('mensagem_sucesso', 'Cliente removido com sucesso');
     }
 
     public function showReport()

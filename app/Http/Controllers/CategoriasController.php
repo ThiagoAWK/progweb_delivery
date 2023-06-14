@@ -40,7 +40,7 @@ class CategoriasController extends Controller
         $categoria = new Categoria();
         $categoria->fill($request->all());
         if ($categoria->save()){
-            $request->session()->flash('mensagem_sucesso', "Categoria salvo!");
+            $request->session()->flash('mensagem_sucesso', "Categoria salva!");
         } else {
             $request->session()->flash('mensagem_erro', 'Deu erro');
         }
@@ -72,7 +72,7 @@ class CategoriasController extends Controller
         $categoria = Categoria::findOrFail($id);
         $categoria->fill($request->all());
         if ($categoria->save()){
-            $request->session()->flash('mensagem_sucesso', 'Categoria alterado');
+            $request->session()->flash('mensagem_sucesso', 'Categoria alterada');
         } else {
             $request->session()->flash('mensagem_erro', 'Deu Erro');
         }
@@ -86,6 +86,6 @@ class CategoriasController extends Controller
     {
         $categoria = Categoria::findOrFail($id);
         $categoria->delete();
-        return Redirect::to('categoria');
+        return Redirect::to('categoria')->with('mensagem_sucesso', 'Categoria removida com sucesso');
     }
 }

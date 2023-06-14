@@ -55,7 +55,7 @@
                                          'maxlength'=>150,
                                          'autofocus']) !!}
                         {!! Form::label('preco', 'Preço') !!}
-                        {!! Form::input('text', 'preco',
+                        {!! Form::input('numeric', 'preco',
                                         null,
                                         ['class'=>'form-control',
                                          'placeholder'=>'Preço',

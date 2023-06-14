@@ -87,7 +87,7 @@ class RestaurantesController extends Controller
     {
         $restaurante = Restaurante::findOrFail($restaurante->id);
         $restaurante->delete();
-        return Redirect::to('restaurante');
+        return Redirect::to('restaurante')->with('mensagem_sucesso', 'Restaurante removido com sucesso');
     }
 
     public function showReport()

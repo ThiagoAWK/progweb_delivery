@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Http\Controllers;
 
 use App\Models\Carrinho;
@@ -42,7 +41,7 @@ class CarrinhosController extends Controller
         $carrinho->quantidade = $quantidade;
         $carrinho->save();
 
-        return redirect()->back()->with('mensagem_sucesso', 'Alimento Adicionado ao Carrinho!');
+        return redirect()->back()->with('mensagem_sucesso', 'Alimento adicionado ao Carrinho com sucesso');
     }
 
     public function removerCarrinho(Request $request)
@@ -54,6 +53,6 @@ class CarrinhosController extends Controller
         $alimentoId = $request->input('alimento_id');
         Carrinho::where('alimento_id', $alimentoId)->delete();
 
-        return redirect()->route('carrinho.lista')->with('mensagem_sucesso', 'Alimento Removido do Carrinho!');
+        return redirect()->route('carrinho.lista')->with('mensagem_sucesso', 'Alimento removido do Carrinho com sucesso');
     }
 }
